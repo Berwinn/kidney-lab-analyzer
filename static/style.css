@@ -1,0 +1,138 @@
+/* === Base & Tokens === */
+:root {
+  --bg: #b3e5fc;
+  --card-bg: #ffffff;
+  --primary: #4CAF50;
+  --primary-hover: #3e9143;
+  --danger: #e53935;
+  --safe: #2e7d32;
+  --text: #222;
+  --muted: #666;
+  --radius: 16px;
+  --shadow: 0 6px 18px rgba(0,0,0,0.15);
+  --space: 24px;
+
+  /* ขยายตัวอักษรทั่วทั้งเว็บ (ใช้ clamp เพื่อสเกลตามหน้าจอ) */
+  --fs-base: clamp(16px, 2.2vw, 19px);
+  --fs-h1: clamp(24px, 3.4vw, 32px);
+  --fs-h2: clamp(20px, 2.8vw, 24px);
+  --fs-h3: clamp(18px, 2.4vw, 20px);
+  --fs-btn: clamp(16px, 2.4vw, 18px);
+  --fs-small: clamp(14px, 2vw, 16px);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background-color: var(--bg);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  font-size: var(--fs-base);
+  line-height: 1.6;
+}
+
+/* === Card / Container === */
+.card {
+  background-color: var(--card-bg);
+  border-radius: var(--radius);
+  padding: calc(var(--space) * 0.9) var(--space);
+  max-width: 560px;          /* กว้างขึ้นเล็กน้อยเพื่อความอ่านง่าย */
+  margin: 24px auto;
+  box-shadow: var(--shadow);
+  text-align: left;          /* เนื้อหาอ่านง่ายขึ้น */
+}
+
+.card h1,
+.card h2,
+.card h3 {
+  text-align: center;
+  margin: 0 0 12px 0;
+}
+
+.card h1 { font-size: var(--fs-h1); }
+.card h2 { font-size: var(--fs-h2); }
+.card h3 { font-size: var(--fs-h3); }
+
+/* ย่อหน้ากับรายการให้โปร่ง */
+.card p { margin: 10px 0; }
+.card ul { margin: 8px 0 0 20px; }
+
+/* === Buttons === */
+.btn {
+  display: block;
+  width: 100%;
+  max-width: 440px;
+  margin: 14px auto 0;
+  background-color: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 14px 18px;                 /* เป้าสัมผัสใหญ่ขึ้น */
+  border-radius: 12px;
+  font-size: var(--fs-btn);
+  cursor: pointer;
+  transition: background-color .2s ease, transform .05s ease;
+  min-height: 48px;                   /* เข้าตามเกณฑ์ touch target */
+}
+.btn:hover { background-color: var(--primary-hover); }
+.btn:active { transform: translateY(1px); }
+
+/* === Canvas / Media === */
+canvas {
+  display: block;
+  margin: 12px auto 8px;
+  border: 1px solid #dcdcdc;
+  border-radius: 12px;
+  max-width: 100%;
+  height: auto;            /* รักษาอัตราส่วน */
+  touch-action: none;      /* ป้องกัน pinch-zoom บนมือถือ */
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+
+/* === Status & Result Text === */
+.danger { color: var(--danger); font-weight: 600; }
+.safe   { color: var(--safe);   font-weight: 600; }
+
+.value, #labVal {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  font-weight: 600;
+}
+
+#statusText {
+  color: #c19a00;          /* เหลืองอุ่น */
+  font-weight: 700;
+  margin-top: 6px;
+  text-align: center;
+}
+
+/* ข้อความเล็ก/อธิบาย */
+.muted { color: var(--muted); font-size: var(--fs-small); }
+
+/* === Lists สวยขึ้นเล็กน้อย === */
+.no-bullets { list-style: none; padding-left: 0; }
+.no-bullets li {
+  position: relative;
+  padding-left: 18px;
+  margin: 6px 0;
+}
+.no-bullets li::before {
+  content: "•";
+  color: #1976d2;
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* === ปรับ Margin บนจอใหญ่นิดหน่อย เพื่อบาลานซ์ === */
+@media (min-width: 1024px) {
+  .card { margin-top: 36px; }
+}
+
+.center-img {
+  display: block;
+  margin: 16px auto; /* จัดให้อยู่กลาง + ระยะห่างบนล่าง */
+}

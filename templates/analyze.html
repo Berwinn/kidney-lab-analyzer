@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>วิเคราะห์ค่าสี Lab</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="card">
+    <h3>อัปโหลดภาพเพื่อตรวจ</h3>
+
+    <!-- Input ซ่อนไว้ ใช้ปุ่มเรียกแทน -->
+    <input type="file" id="imageInput" accept="image/*" style="display:none;" />
+
+    <canvas id="canvas"></canvas>
+
+    <p><strong>Lab:</strong> <span id="labVal">-</span></p>
+    <p id="diagnosis"></p>
+    <p id="statusText" style="color: rgb(195, 178, 69); font-weight: bold;"></p>
+
+    <button class="btn" onclick="document.getElementById('imageInput').click()">📷 อัปโหลดหรือถ่ายรูป</button>
+    <button class="btn" onclick="location.href='index.html'">🏠 หน้าหลัก</button>
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>ตรวจสุขภาพไต</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+  <div class="card">
+    <h2>ตรวจสุขภาพไต</h2>
+    <button class="btn" onclick="location.href='analyze.html'">ตรวจภาวะของโรค</button>
+    <button class="btn" onclick="location.href='info.html'">สาระน่ารู้เกี่ยวกับโรคไต</button>
+
+    <img src="{{ url_for('static', filename='image.png') }}" width="200" class="center-img" />
+    
+  </div>
+</body>
+</html>
