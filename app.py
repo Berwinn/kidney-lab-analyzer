@@ -1,14 +1,11 @@
-from flask import Flask, render_template, request, jsonify, redirect
+import os
+from flask import Flask, render_template, request, jsonify, redirect, send_file, url_for
 from flask_cors import CORS
 import numpy as np
 from skimage import color
 from PIL import Image
 import qrcode
-from pyngrok import ngrok, conf
-
-# ตั้งค่า ngrok
-ngrok.set_auth_token("30jV5mUc7UGqQdUvbJWDLUvCv11_7oYbPaDFmEGm9RmmmmHHc")
-conf.get_default().region = "ap"
+from io import BytesIO
 
 app = Flask(__name__, static_folder='static', template_folder='templates')
 CORS(app)
@@ -46,23 +43,22 @@ def analyze_image():
 
     avg_lab = np.mean(region, axis=0)
     return jsonify({
-        "L": round(avg_lab[0], 2),
-        "a": round(avg_lab[1], 2),
-        "b": round(avg_lab[2], 2),
+        "L": round(float(avg_lab[0]), 2),
+        "a": round(float(avg_lab[1]), 2),
+        "b": round(float(avg_lab[2]), 2),
     })
 
+# ✅ QR แบบถาวร: สร้างตามโดเมนจริงของ Render
+@app.route('/qr.png')
+def qr_png():
+    # url_for(..., _external=True) จะให้ URL สมบูรณ์ตามโดเมนที่เรียกจริงบน Render
+    target_url = url_for('index', _external=True)  # ชี้ไป index.html
+    img = qrcode.make(target_url)
+    buf = BytesIO()
+    img.save(buf, format='PNG')
+    buf.seek(0)
+    return send_file(buf, mimetype='image/png')
+
 if __name__ == '__main__':
-    tunnel = ngrok.connect(5000, bind_tls=True)
-    public_url = tunnel.public_url  # ✅ สำคัญ
-
-    print(f"\n🔗 เปิดใช้งานที่: {public_url}/index.html")
-
-    try:
-        qr_url = f"{public_url}/index.html"
-        img = qrcode.make(qr_url)
-        img.save("static/qr_code.png")
-        print(f"📱 QR สำหรับสแกน: {qr_url}")
-    except Exception as e:
-        print("⚠️ สร้าง QR ไม่สำเร็จ:", e)
-
-    app.run(host='0.0.0.0', port=5000)
+    port = int(os.environ.get('PORT', 5000))  # Render จะส่ง PORT มาให้
+    app.run(host='0.0.0.0', port=port)
