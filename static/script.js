@@ -56,7 +56,7 @@ imageInput.addEventListener("change", (e) => {
         }
 
         // ✅ ตัดสินจากค่า a และ b เท่านั้น
-        const isMicroAlbuminuria = a > -2 || b < 10;
+        const isMicroAlbuminuria = a > -14 || b < -13;
 
         if (diagnosis) {
           if (isMicroAlbuminuria) {
