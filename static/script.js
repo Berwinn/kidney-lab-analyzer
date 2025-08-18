@@ -27,7 +27,7 @@ imageInput.addEventListener("change", (e) => {
     const centerX = Math.floor(canvas.width / 2);
     const centerY = Math.floor(canvas.height / 2);
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 100, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, 240, 0, 2 * Math.PI);
     ctx.strokeStyle = "red";
     ctx.lineWidth = 3;
     ctx.stroke();
@@ -55,8 +55,8 @@ imageInput.addEventListener("change", (e) => {
           labVal.textContent = `(${L.toFixed(2)}, ${a.toFixed(2)}, ${b.toFixed(2)})`;
         }
 
-        // ✅ ตัดสินจากค่า a และ b เท่านั้น
-        const isMicroAlbuminuria = a > -14 || b < -13;
+        // ตัดสินจากค่า a และ b เท่านั้น
+        const isMicroAlbuminuria = a > -5 || b < -25;
 
         if (diagnosis) {
           if (isMicroAlbuminuria) {
