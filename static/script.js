@@ -27,7 +27,7 @@ imageInput.addEventListener("change", (e) => {
     const centerX = Math.floor(canvas.width / 2);
     const centerY = Math.floor(canvas.height / 2);
     ctx.beginPath();
-    ctx.arc(centerX, centerY, 240, 0, 2 * Math.PI);
+    ctx.arc(centerX, centerY, 100, 0, 2 * Math.PI);
     ctx.strokeStyle = "red";
     ctx.lineWidth = 3;
     ctx.stroke();
